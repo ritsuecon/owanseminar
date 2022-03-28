@@ -66,7 +66,7 @@
 Rプログラミング（特にエラー）について質問する際には，以下の記事を読んでから行ってください．
 他の人から答えてもらいやすい質問の仕方が説明されています．
 
-[https://stackoverflow.com/help/minimal-reproducible-example]
+https://stackoverflow.com/help/minimal-reproducible-example
 
 ### 教科書
 
