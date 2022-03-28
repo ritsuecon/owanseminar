@@ -66,7 +66,7 @@
 Rプログラミング（特にエラー）について質問する際には，以下の記事を読んでから行ってください．
 他の人から答えてもらいやすい質問の仕方が説明されています．
 
-https://stackoverflow.com/help/minimal-reproducible-example
+(https://stackoverflow.com/help/minimal-reproducible-example)
 
 ### 教科書
 
@@ -108,7 +108,7 @@ Scott Cunninghamという経済学者が書いた[***Causal Inference: The Mixta
 
 初回のセッションからRとRStudioを使いますから，それまでにRとRStudioを自分のラップトップにインストールしておいてください．**初回のセッションでは，インストールの仕方を説明する時間は設けません**．以下のリンク先にある資料を参考にして，自身でインストールしてください．インストールについて，どうしてもわからないことがある場合は，TAに聞いてください．**リンク先の資料の作成者である矢内勇生先生には問い合わせないこと**．
 
- - https://yukiyanai.github.io/jp/resources/
+ - (https://yukiyanai.github.io/jp/resources/)
 
 
 ### スケジュール
