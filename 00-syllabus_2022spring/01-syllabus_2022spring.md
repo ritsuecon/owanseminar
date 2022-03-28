@@ -1,7 +1,5 @@
 # 大湾秀雄ゼミTAセッションのシラバス（2022年度春学期）
 
-<hr style="border:2px solid black"> </hr>
-
 **最終更新：2022/03/26**　（最新のシラバスは[こちら](https://ritsu1997.github.io/owanseminar/00-syllabus_2022spring/01-syllabus_2022spring.html)）
 
 ### TAセッション概要
