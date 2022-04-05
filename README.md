@@ -2,6 +2,10 @@
 
 大湾学部ゼミTAセッションの資料です．
 
+レポジトリーは[こちら](https://github.com/ritsu1997/owanseminar)．
+
+Webページは[こちら](https://ritsu1997.github.io/owanseminar/)．
+
 シラバスは[こちら](00-syllabus_2022spring/01-syllabus_2022spring.md)．
 
 **初回までに提出の事前課題があります**．
