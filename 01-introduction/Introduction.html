@@ -79,6 +79,23 @@ name: logistics
   - 例　現行の人事施策に効果が認められない場合，廃止するなど．
 
 - もちろん，記述的な分析や予測的な分析も場合によっては有用．
+
+---
+## 因果推論と予測の違い
+
+- 因果推論は統計モデルのパラメータに関心がある（パラメータが施策などの因果効果に相当する）．
+  
+- 予測は統計モデル自体には関心がなく（道具にすぎない），あくまでサンプルから学習したパターンを使って未知のデータの予測をしたい．
+
+- 回帰モデルでのたとえ話：
+  
+  - `\(Y = \beta_0 + \beta_1 X + \varepsilon\)` という真のモデルがあるとする．
+  
+  - データから， `\(\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X\)` という回帰式が推定できたとする．
+  
+  - この時， `\(\hat{\beta_1}\)` に基づいた意思決定を志向するのが因果推論（e.g., 政策の実施・廃止）．
+  
+  - 一方で， `\(\hat{Y}\)` に基づいた意思決定を志向するのが予測（e.g., レコメンデーション）．
   
 ---
 class: title-slide-section, center, middle
@@ -265,6 +282,7 @@ $$
 $$
 Y = \beta_0 + \beta_1 X_1 + \varepsilon.
 $$
+- 回帰モデルを具体的に定式化すること（どの説明変数を入れるか？どのような関数形にするか？）を**モデルの特定化**（model specification）と言う．
 
 ---
 ## 回帰分析とは6
@@ -345,9 +363,9 @@ $$
 
 - `\(\hat{\beta}_1\)` について，標本共分散 `\(\div\)` 標本分散になっていることがわかる．
 
-- OLS推定により得られたパラメータの推定値から定められる回帰直線 `\(\hat{Y_i} = \hat{\beta}_0 + \hat{\beta}_1 X_i\)` を**標本回帰関数**（sample regression function）や**予測線**（fitted line）と呼ぶ．
+- OLS推定により得られたパラメータの推定値から定められる回帰直線 `\(\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X\)` を**標本回帰関数**（sample regression function）や**予測線**（fitted line）と呼ぶ．
 
-- `\(\hat{Y_i}\)` を `\(Y_i\)` の**予測値**（fitted value）と呼び，また `\(\hat{\varepsilon}_i = Y_i  - \hat{Y_i}\)` を**残差**（residuals）と呼ぶ．
+- `\(\hat{Y_i} = \hat{\beta}_0 + \hat{\beta}_1 X_i\)` を `\(Y_i\)` の**予測値**（fitted value）と呼び，また `\(\hat{\varepsilon}_i = Y_i  - \hat{Y_i}\)` を**残差**（residuals）と呼ぶ．
 
 ---
 - `\(b_0 = 4, b_1 = 1.\)`
@@ -387,6 +405,47 @@ $$
 
 &lt;img src="Introduction_files/figure-html/unnamed-chunk-9-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 
+---
+### 決定係数
+
+- 次の量 `\(R^2\)` を**決定係数**（coefficient of determination）と呼ぶ： `$$R^2 = \frac{\text{SSE}}{\text{SST}}.$$`
+
+- ただし， `\(\text{SSE} = \sum_{i=1}^n (\hat{Y_i} - \bar{Y})^2, \, \text{SST} = \sum_{i=1}^n (Y_i - \bar{Y})^2\)`.
+
+- つまり，従属変数の変動のうち，どれくらいの変動を説明できているかという比率．
+
+- モデルの**あてはまりの良さ**（goodness of fit）の指標として使われる．
+
+- 決定係数は説明変数の数について増加関数になっているという問題がある．（関係ない説明変数でも増やせば `\(R^2\)` を大きくできる．）
+
+- 代わりに，説明変数の数についてペナルティを与えるような**調整済み決定係数**（adjusted R-squared）もよく使われる．
+
+---
+
+
+`\(R^2=\)` 0.89 
+
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-11-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+`\(R^2=\)` 0.52
+
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-13-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+### 決定係数
+
+- 決定係数が小さくても推定量の性質（不偏性や一致性）には関係しない．
+
+- 推論という観点からは，実務上これ自体に特別な意味がある指標ではない．
+
+  - 欠落変数の存在を診断するときに使われたりする [(Oster, 2019)](https://www.tandfonline.com/doi/full/10.1080/07350015.2016.1227711)．
+
+- 予測という観点からも，モデルパフォーマンスの指標としてはあまり使えない．（cf. [こちらの記事](https://qiita.com/s-yonekura/items/43aefbe726ee814123f7)）
+
+- 結論：あまり気にしなくてもいい．
 
 ---
 ## OLS推定量の性質
@@ -427,13 +486,10 @@ OLS推定量はいくつかの条件が満たされるとき，推定する上�
 - 偏ったサンプルに基づいて回帰モデルを推定すると，真のモデルからはかけ離れた推定値になる．
 
 ---
-&lt;img src="Introduction_files/figure-html/unnamed-chunk-10-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-14-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 ---
-&lt;img src="Introduction_files/figure-html/unnamed-chunk-11-1.png" width="50%" style="display: block; margin: auto;" /&gt;
-
----
-&lt;img src="Introduction_files/figure-html/unnamed-chunk-12-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-15-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 ---
 ### 仮定3. **完全な共線性がない**
@@ -516,7 +572,7 @@ $$
 
 - `\(\tilde{\delta_1}\)` というのは `\(X_1\)` と `\(X_2\)` の標本共分散 `\(\div\)` `\(X_2\)` の標本分散であるから，$X_1$ と `\(X_2\)` の標本相関係数がゼロであることが `\(\tilde{\delta_1} = 0\)` の必要十分条件．
 
-- つまり，$X_1$ と `\(X_2\)` が相関するとき `\(\mathbf{E}[\tilde{\beta}_1] \neq \beta_1\)` ということになる.
+- つまり， `\(X_1\)` と `\(X_2\)` が相関するとき `\(\mathbf{E}[\tilde{\beta}_1] \neq \beta_1\)` ということになる.
   - `\(X_1\)` と `\(X_2\)` が相関するならば，当然， `\(X_1\)` と `\(\nu = \beta_2  X_2 + \varepsilon\)` も相関するため，仮定4が満たされない．
 
 - 逆に， `\(X_1\)` と `\(X_2\)` が無相関ならば `\(\mathbf{E}[\tilde{\beta}_1] = \beta_1\)` ということになり，欠落変数は無害となる（ `\(X_1\)` だけに関心があるならば， `\(X_2\)` の影響は単なるランダムなノイズとみなせる）．
@@ -536,6 +592,23 @@ $$
 - `\(\mathbf{E}[\tilde{\beta_1}]\)` が `\(\beta_1\)` よりもゼロに近いとき，**ゼロに向かってバイアスがかかっている**（biased toward zero）と表現する．
 
 - `\(\beta_1 &gt; 0\)` のとき下方バイアスなら， `\(\beta_1 &lt; 0\)` のとき上方バイアスなら，ゼロに向かってバイアスがかかっているということになる．
+
+---
+### モデルの誤った特定化
+
+- 欠落変数バイアスはモデルの**誤った特定化**（misspecification）によって生じる．
+
+- 真のモデルが `\(Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \varepsilon\)` なのに `\(Y = \beta_0 + \beta_1 X_1 + \varepsilon\)` と誤って特定化．
+
+- 逆に，不要な変数を誤って入れてしまう場合はどうか？
+
+  - 例：真のモデルが `\(Y = \beta_0 + \beta_1 X_1 + \varepsilon\)` なのに `\(Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \varepsilon\)` と誤って特定化．
+  
+  - これを**過剰特定化**（overspecification）と呼ぶ．
+
+- 過剰特定化は問題にならない．真のモデルにおいて， `\(\beta_2 = 0\)` であるというだけで，過剰特定化は誤った特定化ではない．
+
+- OLS推定量も不偏性を満たし， `\(\mathbf{E}[\hat{\beta}_1] = \beta_1, \, \mathbf{E}[\hat{\beta}_2] = 0\)` となる．
 
 ---
 ### 仮定5. **均一分散**
@@ -601,22 +674,32 @@ $$
 
 - 古典的線形モデル仮定のもとでは，OLS推定量が**最良不偏推定量**（best unbiased estimator; **BUE**）となる．
 
-- また，このとき， `$$t_{\hat{\beta_j}} = \frac{\hat{\beta_j}}{\text{se}(\hat{\beta}_j)} \sim t_{n-k-1}$$` であることが示せる．
+- また，このとき， `$$t_{\hat{\beta_j}} = \frac{\hat{\beta_j }-\beta_j^0}{\text{se}(\hat{\beta}_j)} \sim t_{n-k-1}$$` であることが示せる．
 
-- この** `\(t\)` 統計量**を使って， `\(t\)` 検定を行って推定値の有意性を検定する．
+- この** `\(t\)` 統計量**が自由度 `\(n-k-1\)` の `\(t\)` 分布に従うことを利用して， `\(t\)` 検定を行って推定値の有意性を検定する．
 
 ---
-### 係数の推定値の有意性検定
+### 係数の推定値の有意性検定と頑健標準誤差，正規近似
 
-- `\(t_{\hat{\beta_j}} = \frac{\hat{\beta_j}}{\text{se}(\hat{\beta}_j)}\)` という検定統計量を使うときの帰無仮説は， `$$H_0: \,\beta_j = 0.$$`
-
-- 対立仮説は， `$$H_1:  \, \beta_j \neq 0.$$`
+- `\(\beta_j^0=0\)` として `\(t_{\hat{\beta_j}} = \frac{\hat{\beta_j}}{\text{se}(\hat{\beta}_j)}\)` という検定統計量を使うときの帰無仮説と対立仮説はそれぞれ， `$$H_0: \,\beta_j = 0.$$`  `$$H_1:  \, \beta_j \neq 0.$$`
 
 - `\(t\)` 統計量から `\(p\)` 値を計算して，有意水準（10%, 5%, 1%）を下回れば，帰無仮説を棄却して**統計的に有意にゼロから離れている**と結論する．
 
 - 実際には仮定5（均一分散）が満たされることはあまりないため，標準誤差を修正した**不均一分散に頑健な標準誤差**（heterosekedasticity-robust standard error）を用いる必要がある．
 
-- さらに，実際には仮定6（正規性）も満たされると断言できることは少ない．
+- さらに，実際には仮定6（正規性）も満たされると断言できることは少ない．（ `\(t\)` 統計量の分布がわからなくなる．）
+
+
+---
+- しかし，仮定6が満たされなくても `\(t\)` 統計量が漸近的に正規分布に従うことが知られており，実際上は問題ない．
+
+- 頑健標準誤差については*The Mixtape*でも詳しくやるので今回は詳述しない．
+
+&gt; People will try to scare you by challenging how you constructed your standard errors. (*The Mixtape, p.77)
+
+- Rのビルトイン関数の`lm`はデフォルトで頑健標準誤差を計算してくれないが難点．
+
+- **estimatr**パッケージの`lm_robust`や**sandwich**パッケージの`vocvHC`を使う必要がある．
 
 
 ---
@@ -635,6 +718,122 @@ $$
 ---
 
 &lt;img src="figs/02-fig2.png" width="1000"&gt;
+
+
+---
+### さまざまな関数形
+
+- 線形回帰モデルの"線形"につられて，被説明変数と説明変数の間の直線的な関係しか分析できないという誤解をする人が多い．
+
+- 線形回帰モデルの線形性はパラメータについての要求であって，説明変数に対してではない．
+
+- その実，線形回帰モデルはかなり柔軟な関係を表現できるし，OLS推定量もシンプルな割にそういった関係をちゃんと把握できる．
+
+- よく使われるもの
+
+  - **多項式回帰**
+  - **ダミー変数**
+  - **交差項**
+  - **対数**
+  
+---
+### 多項式回帰
+
+`$$Y = \beta_0 + \beta_1 X_1 +  \beta_2 X_1^2 +  \beta_3 X_1^3 + \cdots + \beta_p X_1^p + \varepsilon.$$`
+
+- 上のように説明変数を累乗項を含めて回帰することを**多項式回帰**（polynomial regression）と呼ぶ．
+
+- どれくらい高次の累乗項を入れるかは分析者の判断（入れすぎると**過学習**（overfitting）になって解釈しづらくなる）．
+
+- 限界効果が逓減または逓増すると予想されるときに使われる．
+
+- 例えば，職務経験年数が年収に与える影響は，はじめのうちは新しい経験や知識が増えて賃金が上がっていくと予想されるが，一定のピークを迎えるとその後は新しい経験や知識があまり増えなくなり賃金への影響が小さくなり始めると考えられる．
+
+  - `\(salary = \beta_0 + \beta_1 exper + \beta_2 exper^2 + \varepsilon\)`.
+  - `\(\beta_1 &gt; 0, \beta_2 &lt; 0\)` と予想される．
+
+---
+
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-16-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+---
+
+1次： `\(\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X_1.\)`
+
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-17-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+  
+---
+
+2次： `\(\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X_1 + \hat{\beta}_1 X_1^2.\)`
+
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-18-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+- `\(X_1\)` の限界効果は， `\(\beta_1 + \beta_2 X_1\)` となり， `\(X_1\)` の現在の水準に依存している．
+
+---
+### ダミー変数
+
+`$$Y_i = \beta_0 + \beta_1 D_i+ \varepsilon_i.$$`
+
+- 個人 `\(i\)` があるカテゴリに含まれるときに `\(D_i = 1\)` ，そうでないときに `\(D_i = 0\)` となるような変数を**ダミー変数**（dummy variable）と呼ぶ．
+
+- カテゴリによって切片が異なるということを表現できる．
+
+- ダミー変数と普通の変数を組み合わせることもできる． `$$Y_i = \beta_0 + \beta_1 X_i + \beta_2 D_i + \varepsilon_i.$$`
+
+---
+
+`\(Y_i = \beta_0 + \beta_1 X_i+ \varepsilon_i.\)`
+
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-19-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+
+`\(Y_i = \beta_0 + \beta_1 D_i + \varepsilon_i.\)`
+
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+
+`\(Y_i = \beta_0 + \beta_1 X_i + \beta_2 D_i + \varepsilon_i.\)`
+
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-21-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+### 交差項
+
+`$$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_1X_2 + \varepsilon.$$`
+
+- 複数の変数を掛け合わせたものを**交差項**（interaction term）と呼び，その係数はそれらの変数の交互作用を捉える．
+
+- `\(X_1\)` を連続的な変数だとすると：
+
+  - `\(X_2\)` がダミー変数なら，グループごとの傾きの違いを捉える．
+
+  - `\(X_2\)` が連続変数なら，値ごとの傾きの違いを捉える．
+  
+- `\(X_1\)` の限界効果は， `\(\beta_1 + \beta_3 X_2\)` となり， `\(X_2\)` に依存している．
+
+- `\(X_2\)` の限界効果は， `\(\beta_2 + \beta_3 X_1\)` となり， `\(X_1\)` に依存している．
+
+
+--- 
+### 対数
+
+- 従属変数や説明変数を対数変換して使うことがある．
+
+- 例： `\(\log(wage) = \beta_0 + \beta_1 educ + \varepsilon\)`.
+
+- 元の水準（level）の変化ではなく，変化率に関心があるときに従属変数の対数を取ることが多い．
+
+- 理論的に導かれる場合もある．
+
+- 従属変数が対数の場合は，係数の解釈は「 `\(educ\)` が `\(1\)` 単位増えると， `\(wage\)` が `\((100\times\beta_1)\%\)` 増える」となる．
+
+- 独立変数が対数の場合は，係数の解釈は「 `\(educ\)` が `\(1%\)` 増えると， `\(wage\)` が `\((\beta_1/100)\%\)` 増える」となる．
+
+- 両方が対数の場合は，係数の解釈は「 `\(educ\)` が `\(1%\)` 増えると， `\(wage\)` が `\(\beta\%\)` 増える」となる．
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
