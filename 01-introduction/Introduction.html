@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>TAセッション１: イントロダクション</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="TA: 北川 梨津" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# TAセッション１: イントロダクション
+## 〜統計学・計量経済学の復習を添えて〜
+### TA: 北川 梨津
+### 最終更新日: 2022-04-11
+
+---
+
+
+class: title-slide-section, center, middle
+name: logistics
+
+# 大湾秀雄ゼミTAセッションにようこそ
+
+
+---
+
+## TAについて
+
+- 名前: 北川 梨津
+
+- 所属：早稲田大学大学院経済学研究科博士後期課程
+
+- 関心：健康経営・人材採用・データ科学一般
+
+- 論文：[*Working from home and productivity under the COVID-19 pandemic: Using survey data of four manufacturing firms*](https://doi.org/10.1371/journal.pone.0261761)（クリックして論文をチェック！）
+
+---
+
+## このTAセッションについて
+
+- [シラバス](https://ritsu1997.github.io/owanseminar/00-syllabus_2022spring/01-syllabus_2022spring.html)を読んでください．
+
+- 資料等は以下のウェブページとgithubレポジトリで管理．
+  - [https://ritsu1997.github.io/owanseminar/](https://ritsu1997.github.io/owanseminar/)
+  - [https://github.com/ritsu1997/owanseminar](https://github.com/ritsu1997/owanseminar)
+
+---
+
+## 人事データ分析の重要性
+
+- データ分析一般の重要性はもはやビジネスパーソンの常識．
+
+- 人事もご多分に漏れない．
+  - 勘や経験，先例主義，HRコンサルにだけ頼っていては，これからの時代，競争力を失う．
+  - 企業の主要な生産要素は労働（人材）！→エビデンスに基づく最適な活用を目指したい！
+  
+- 人手不足も進む中で，なるべ従業員ひとりひとりの生産性を高め，また魅力的な職場をつくって優秀な人材を引きつけることの重要性も高まる一方．→人事データ分析の付加価値も高まる．
+
+- 人事データ分析は**ピープルアナリティクス**，**HRアナリティクス**，**タレントアナリティクス**などのバズワードもあって，日本でも業界が盛り上がりつつある．
+
+- ちなみに，計量経済学の人事データへの応用は**インサイダーエコノメトリクス**と呼ばれる．
+
+
+
+---
+
+## 人事データ分析の特徴
+
+- 通常どんな企業にも必ず人事データがある．→人事データ分析というスキルの普遍性．
+
+- 基本的にはビッグデータというほど大きくはない．→必ずしも予測タスクとは親和性が高くない（予測は倫理的な問題も！cf. **プロファイリング**）．
+
+- 人事実務においては**因果関係の理解**が重要になる．→**計量経済学**や**統計的因果推論**が力を発揮．
+  - 例　どういう職務経験がハイパフォーマンスに繋がるのか？現在行っている人事施策に効果はあるのか？
+
+- 因果関係を理解すれば，人事上の意思決定の質向上に繋がる．
+  - 例　現行の人事施策に効果が認められない場合，廃止するなど．
+
+- もちろん，記述的な分析や予測的な分析も場合によっては有用．
+  
+---
+class: title-slide-section, center, middle
+name: logistics
+
+# 統計学の復習（とてもざっくり！）
+
+---
+## 基本1
+
+- **事象**（event）とは，何かしらのできごと．
+  - 例「サイコロを振って偶数の目が出る」
+
+- **確率**（probability）は，事象の起きやすさ．事象 `\(A\)` が起きる確率を， `\(\Pr(A)\)` と書く．
+
+- **条件付き確率**（conditional probability）は，ある事象が起きたということを所与とするときに，ある別な事象が起きる確率．事象 `\(A\)` を所与としたときの事象 `\(B\)` の条件付き確率を， `\(\Pr(B \mid A)\)` と書く．なお， `\(\Pr(B \mid A) = \frac{\Pr(A \cap B)}{\Pr(A)}\)` と容易に確かめられる．
+
+- **確率変数**（random variables）とは，試行（ `\(\simeq\)` ランダムな行為）がもたらす事象を実数に対応させる関数．
+  - 例「サイコロを振って偶数の目がでたら `\(1\)` の値をとり，そうでなければ `\(0\)` の値をとる確率変数 `\(X\)` 」
+  
+
+---
+
+## 基本2
+
+- **確率（質量）関数**（probability mass function; PMF）は，確率変数が具体的な値をとる確率を記述する関数．つまり，確率変数の確率質量関数 `\(p_X(x)\)` は ， `$$p_X(x) = \Pr(X = x)$$` と定義される．
+  
+  - 注意！「 `\(X\)` 」は確率変数，「 `\(x\)` 」はある具体的な値，「 `\(X = x\)` 」は事象．
+  
+  - さっきのサイコロの例だと， `\(p_X(1) = \Pr(X = x) = \Pr(\text{偶数の目が出る}) = 0.5\)`.
+
+---
+
+## 基本3
+
+- **期待値**（expectated value）は，確率変数がとりうる値をその確率で重みづけて足し合わせたもの．つまり， $$\mathbf{E}[X] = \sum_{x\in\mathcal{X}} x \times p_X(x) $$ と定義される．
+
+  - さっきのサイコロの例だと， `\(\mathbf{E}[X] = 0 \times p_X(0) + 1 \times p_X(1) = 0.5\)`.
+  
+  - **平均**（mean）とも呼び， `\(\mu = \mathbf{E}[X]\)` と表記されることが多い．
+
+
+---
+
+## 基本4
+
+- **分散**（variance）は，確率変数がとりうる値と平均との差（ `\(=\)` **偏差**）の二乗をその値が実現する確率で重みづけて足し合わせたもの．つまり， $$\mathbf{Var}[X] = \sum_{x\in\mathcal{X}} (x - \mu) ^2 \times p_X(x) $$ と定義される．
+
+  - さっきのサイコロの例だと， `\(\mathbf{Var}[X] = (0 - 0.5)^2  \times p_X(0) + (1 - 0.5)^2 \times p_X(1) = 0.25\)`.
+  
+  - `\(\sigma^2 = \mathbf{Var}[X]\)` と表記されることが多い．
+  
+  - `\(\sigma = \sqrt{\mathbf{Var}[X]}\)` を**標準偏差**（standard deviation）と呼ぶ．
+  
+---
+
+## 基本5
+
+- **同時確率関数**（joint probability function）とは，複数の確率変数の組が具体的な値の組をとる確率を記述する関数．つまり，2つの確率変数 `\(X\)` と `\(Y\)` があるとき，その同時確率関数 `\(p_{X,Y}(x, y)\)` は， `$$p_{X,Y}(x, y) = \Pr(X = x, Y = y)$$` と定義される．
+
+  - つまり， `\(X = x\)` という事象と `\(Y = y\)` という事象が同時に起きる確率をすべての `\(x ,y\)` の組み合わせについて記述している．
+
+---
+
+## 基本6
+
+- **条件付き確率関数**（conditional probability function）は， `\(X = x\)` が与えられたときの `\(Y = y\)` となる確率を記述する関数．つまり，同時確率関数 `\(p_{Y \mid X}(y \mid x)\)` は， `$$p_{Y \mid X}(y \mid x) = \Pr(Y = y \mid X = x)$$` と定義される．
+
+ - 条件付き確率の性質から，簡単に `\(p_{Y \mid X}(y \mid x) = \frac{p_{X,Y}(x, y)}{p_X(x)}\)` と確かめられる．
+
+---
+
+## 基本7
+
+- 以下の条件が成り立つとき，2つの確率変数 `\(X\)` と `\(Y\)` は互いに**独立**である（independent）と言う． `$$p_{X,Y}(x, y) = p_X(x) \, p_Y(y)$$`.
+
+  - このことは，条件付き確率が条件に依存しないことと同じ（ `\(p_{Y \mid X}(y \mid x) = p_Y(y)\)` ）．
+  
+  - つまり，一方が他方について何も追加の情報をもたらさないということ．
+  
+  - 2つの確率変数 `\(X\)` と `\(Y\)` が独立であるということを， `\(X \perp \!\!\! \perp Y\)` と表記する．
+  
+---
+
+## 基本8
+
+- **条件付き期待値**（conditional expectated value）は，ある事象に条件付けたときに確率変数がとりうる値をその条件付き確率で重みづけて足し合わせたもの．つまり， `\(X = x\)` で条件つけたときの確率変数 `\(Y\)` の条件付き期待値 `\(\mathbf{E}[Y \mid X = x]\)` は， `$$\mathbf{E}[Y \mid X = x] = \sum_{y\in\mathcal{Y}} y \times p_{Y \mid X}(y \mid x)$$` と定義される．
+
+- **重要な命題**： `\(X \perp \!\!\! \perp Y \Rightarrow \mathbf{E}[Y \mid X = x] = \mathbf{E}[Y], \forall x\)`.
+
+  - 独立ならば， `\(p_{Y \mid X}(y \mid x) =  p_{Y}(y)\)` であることから明らか．
+  
+  - 統計的因果推論の枠組みでは頻繁に使われるので，その意味をよく理解すること．
+  
+---
+
+## 基本9
+
+- ここまで**離散型確率変数**に限定して議論してきた．
+  - つまり，とびとびの値をとるような確率変数．
+  - 例　ダミー変数，カテゴリー変数．
+  
+- **連続型確率変数**もある．
+  - 連続的な値をとる確率変数．
+  - 例　身長，年収．
+  
+- 連続型確率変数の場合も直観はだいたい同じなので割愛．
+  - `\(p(\cdot)\)` （確率質量関数）が `\(f(\cdot)\)` （**確率密度関数**）になって， `\(\sum\)` が `\(\int\)` になるくらい．
+
+---
+class: title-slide-section, center, middle
+name: logistics
+
+# 回帰分析の復習（とてもざっくり！）
+
+---
+## 回帰分析とは1
+
+- ある確率変数 `\(Y\)` と1つ以上の確率変数 `\(X_1, X_2, \dots, X_k\)` の間の関係をデータから推定する分析．
+
+- `\(Y\)` を `\(X_1, X_2, \dots, X_k\)` の関数として捉えるようなイメージ．
+
+- つまり， `$$Y = f(X_1, X_2, \dots, X_k)$$` というような関係があるとして，この `\(f\)` の形をデータから推定する作業．
+
+- `\(Y\)` を**従属変数**（dependent variable），**非説明変数**（explained variable），**目的変数**（objective variable）などと呼ぶ．
+
+- `\(X_1, X_2, \dots, X_k\)` を**独立変数**（independent variables），**説明変数**（explanatory variables），**特徴量**（features）などと呼ぶ．
+
+---
+## 回帰分析とは2
+
+ - `\(Y\)` と `\(X_1, X_2, \dots, X_k\)` はデータから観察される変数．
+ 
+ - `\(Y\)` は観察される変数だけですべて決定されることは少なく，観察できない変数の影響も受けると考えるのが自然．
+ 
+  - 例) 年収 `\(=f(\)` 教育年数 `\()\)` としたときに，教育年数が年収を部分的を決定することは考えられるが，完全にそれだけで説明できるとは思われない．
+ 
+ - そのような観察されない変数の影響をひとまとめに `\(\varepsilon\)` と書くことにして， `$$Y = f(X_1, X_2, \dots, X_k) + \varepsilon$$` として観察されない変数の影響を明示的に書くことにする．
+
+ - `\(\varepsilon\)` は**誤差項**（error term）や**撹乱項**（disturbance term）と呼ばれる．
+
+---
+## 回帰分析とは3
+
+- `\(f(X_1, X_2, \dots, X_k)\)` の形を規定するパラメータ（のベクトル）として， `\(\beta\)` を導入する．つまり， `$$Y = f(X_1, X_2, \dots, X_k \mid \beta) + \varepsilon$$` として，パラメータを明示的に書く．
+
+- このような式を，**回帰式**（regression equation）や**回帰モデル**（regression model）と呼ぶ．
+
+- 特に，次の関数形を仮定するモデルを，**線形回帰モデル**（linear regression model）と呼ぶ．
+
+`\begin{eqnarray}
+Y &amp;=&amp;  f(X_1, X_2, \dots, X_k \mid \beta) + \varepsilon \\ \\
+  &amp;=&amp; \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_k X_k + \varepsilon.
+\end{eqnarray}`
+
+---
+## 回帰分析とは4
+
+$$
+Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_k X_k + \varepsilon
+$$
+
+- 線形回帰モデルは実証分析で非常によく使われる．
+
+- まずこの線形回帰モデルによる分析をマスターすることが，立派なデータサイエンティストへの近道．
+
+- `\(\beta_0\)` は**切片**（intercept）と呼ばれる．
+
+- `\(\beta_1, \beta_2, \dots, \beta_k\)` は**回帰係数**（regression coefficients）や**傾き**（slope）と呼ばれる．
+
+- 回帰係数 `\(\beta_l\)` は，説明変数 `\(X_l\)` が `\(1\)` 単位増えたときに，被説明変数 `\(Y\)` が何単位増えるかに対応すると解釈される．（後で詳述）
+
+  - 線形回帰モデルの両辺を `\(X_l\)` について偏微分すると， `\(\frac{\partial Y}{\partial X_l} = \beta_l\)`　となる．
+
+---
+## 回帰分析とは5
+
+- 説明変数が1つしかない線形回帰モデルを特に**線形単回帰モデル**（simple linear regression model）と呼ぶ．
+
+- 説明変数が2つ以上ある線形回帰モデルを特に**線形重回帰モデル**（multiple linear regression model）と呼ぶ．
+  
+- ここからしばらくは，議論の見通しをよくするために次のような線形単回帰モデルを考える．（直観は説明変数が複数の場合も同じ）
+
+$$
+Y = \beta_0 + \beta_1 X_1 + \varepsilon.
+$$
+
+---
+## 回帰分析とは6
+
+- 線形回帰モデルにいくつかの仮定をおく．
+
+- まず，なんでもない仮定として `\(\mathbf{E}[\varepsilon] = 0\)` をおく．（innocuousな仮定）
+
+- 次に，**平均独立の仮定**（mean independence）をおく．つまり， `\(\mathbf{E}[\varepsilon \mid X_1] = \mathbf{E}[\varepsilon]\)`.
+
+- 誤差項の期待値はゼロという仮定とあわせて，**条件付き期待値ゼロの仮定**という．つまり， `\(\mathbf{E}[\varepsilon \mid X_1] = 0\)`.
+
+- このとき，回帰式の両辺の条件付き期待値をとると，
+`\begin{eqnarray}
+\mathbf{E}[ Y \mid X_1 = x] &amp;=&amp;  \mathbf{E}[ \beta_0 + \beta_1 X_1\mid X_1 = x] + \mathbf{E}[ \varepsilon \mid X_1 = x] \\ \\
+  &amp;=&amp; \beta_0 + \beta_1 x.
+\end{eqnarray}`
+
+- これを**母回帰関数**（pupulation regression function）と呼ぶ．
+
+---
+## 最小二乗法について
+
+- 統計学的な問題は，**「線形回帰モデルのパラメータ `\(\beta\)` を手元のデータからどうやって推定するか」**というものに帰着する．
+
+  - 例えば， `\(Engagement =\beta_0 + \beta_1 HoursWorked +\varepsilon\)` という回帰モデルのパラメータ `\(\beta_0, \beta_1\)` をどうやってデータから推定するか？
+  
+  - 我々はモデルが `\(Y = \beta_0 + \beta_1 X_1 + \varepsilon\)` という形であるということを仮定しているが， `\(\beta_0, \beta_1\)` の値は未知であることに注意．
+
+- `\(\{ (Y_i, X_{1i}) \}_{i=1}^n\)` というデータ（サンプル）が得られたとき，そこから回帰モデルのパラメータ `\(\beta_0, \beta_1\)` を直接観察することはできないので，一定の手順に従って**推定**（estimate）する必要がある．
+
+---
+- `\(\{ (Y_i, X_{1i}) \}_{i=1}^n\)` というデータ（サンプル）が得られたとき， $$ Y = \beta_0 + \beta_1 X + \varepsilon,$$ という線形回帰モデルを仮定すると，データについても次のような式が成り立つはずである： $$ Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i.$$
+
+- `\(Y_i\)` と `\(X_i\)` 以外はデータから直接観測できないことに注意．
+
+- 未知のパラメータ `\(\beta_0\)` と `\(\beta_1\)` の値を決めるというのは `\(X_i\)` と `\(Y_i\)` の散布図上に直線を引くことに相当する．
+
+- イメージ： `\(Y = \beta_0 + \beta_1 X + \varepsilon \rightarrow \{Y_i, X_i \}_{i=1}^n \rightarrow Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i \rightarrow \hat{\beta}_0, \hat{\beta}_1\)`.
+
+---
+`$$Y = \beta_0 + \beta_1 X + \varepsilon.$$`
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-1-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+`$$Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i.$$`
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-2-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+`$$\{ Y_i, X_i \}_{i=1}^n.$$`
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-3-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+`$$Y_i = \hat{\beta}_0 + \hat{\beta}_1 X_i + \varepsilon_i.$$`
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-4-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+
+- では，データからどのように直線を引けばよいか？
+
+- データからパラメータを推定する手法の一つが**最小二乗法**（ordinary least squares; **OLS**）．
+
+- 直線と各点からのズレが平均的にできるだけ小さくなるように定めたもの．
+
+- 候補となる直線を `\(Y_i = b_0 + b_1 X_i\)` とすると，直線と各点の縦方向に関するズレは `\(Y_i - b_0 - b_1 X_i\)` となる．
+
+- これの二乗和（**残差平方和**（sum of squared residuals）とも呼ぶ） `$$\sum_{i=1}^n (Y_i - b_0 - b_1 X_i)^2$$` を最小化する `\(b_0^*, b_1^*\)` を**OLS推定量**と呼び， `\(\hat{\beta}_0, \hat{\beta}_1\)` と表記する．
+  - 記号 `\(\hat{}\)` は推定量（または推定値）を表すときによく用いられる．特に， OLS推定量であることを強調する必要があるとき， `\(\hat{\beta}_1^{OLS}\)` などと表記されることもある．
+
+---
+- `\(\min_{(b_0, b_1)}\sum_{i=1}^n (Y_i - b_0 - b_1 X_i)^2\)` の最小化問題を解くと，OLS推定量が次の通り求まることがわかる：
+`\begin{align*}
+\hat{\beta}_1 &amp;=  \frac{\sum_{i=1}^n(X_i - \bar{X})(Y_i - \bar{Y})}{\sum_{i=1}^n(X_i -\bar{X})^2}, \\ \\
+\hat{\beta}_0 &amp;= \bar{Y} - \hat{\beta}_1 \bar{X}.
+\end{align*}`
+
+- ただし， `\(\bar{X}\)` と `\(\bar{Y}\)` はそれぞれ標本平均．
+
+- `\(\hat{\beta}_1\)` について，標本共分散 `\(\div\)` 標本分散になっていることがわかる．
+
+- OLS推定により得られたパラメータの推定値から定められる回帰直線 `\(\hat{Y_i} = \hat{\beta}_0 + \hat{\beta}_1 X_i\)` を**標本回帰関数**（sample regression function）や**予測線**（fitted line）と呼ぶ．
+
+- `\(\hat{Y_i}\)` を `\(Y_i\)` の**予測値**（fitted value）と呼び，また `\(\hat{\varepsilon}_i = Y_i  - \hat{Y_i}\)` を**残差**（residuals）と呼ぶ．
+
+---
+- `\(b_0 = 4, b_1 = 1.\)`
+
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-5-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+- `\(\beta_0 = 0, \beta_1 = 5.\)`
+
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-6-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+- `\(b_0 = \hat{\beta}_0^{OLS}, b_1= \hat{\beta}_1^{OLS}.\)`
+
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-7-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+### よくある疑問
+
+- なぜ二乗するのか？
+  - 二乗しないまま和をとると，目的関数の最小化（最大化も同じ）が解を持たなくなる( `\(\simeq\)` `\(b_0, b_1\)` の値によっていくらでも小さくしたり大きくしたりできる)．
+  
+- 二乗しないまま和をとって， `\(\sum_{i=1}^n Y_i - b_0 - b_1 X_i = 0\)` となるような `\(b_0, b_1\)` を使うのは？
+  - そのような `\(b_0, b_1\)` の組み合わせは無数に存在する．
+
+- 二乗の代わりに絶対値をとるのは？
+  - それは**最小絶対偏差法**（least absolute deviations; **LAD**）と呼ばれる推定方法で，外れ値に強いという性質がある．
+  - あまり使うことはないと思うので，あまり気にしなくてOK．
+
+---
+直線を下にずらし続ければ， `\(\sum_{i=1}^n Y_i - b_0 - b_1 X_i\)` をいくらでも小さくできる．
+
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-8-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+`\(\sum_{i=1}^n Y_i - b_0 - b_1 X_i \simeq 0\)` となる直線の例（他にも無数にある）．
+
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-9-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+
+---
+## OLS推定量の性質
+
+OLS推定量はいくつかの条件が満たされるとき，推定する上で望ましい性質を持つ．
+
+- **ガウス・マルコフの仮定**：
+  - 仮定1. **パラメータについて線形**（linear in parameters）．
+  - 仮定2. **無作為抽出**（random sampling）．
+  - 仮定3. **完全な共線性がない**（no perfect collinearity）．
+  - 仮定4. **条件付き期待値ゼロ**（zero conditional mean）．
+  - 仮定5. **均一分散**（homoskedasticity）．
+
+- 仮定1 - 4が満たされるとき，OLS推定量は**不偏性**と**一致性**を満たす．
+
+- 仮定1 - 5が満たされるとき，OLS推定量は**最良線形不偏推定量**（best linear unbiased estimator; **BLUE**）となる．（**ガウス・マルコフの定理**）
+
+
+---
+### 仮定1. **パラメータについて線形**
+
+- 母集団における回帰モデル（population model）が， `$$Y = \beta_0 + \beta_1 X_1 +  \beta_2 X_2 + \dots + \beta_k X_k + \varepsilon$$` と書けるという仮定．
+- 母集団における回帰モデルを**真のモデル**（true model）と呼ぶこともある．
+- 「ooがxxについて線形」とは，ざっくり言うと「ooとxxを2次元平面に書くと直線になっている」ということに相当する．つまり， `\(Y\)` と `\(\beta\)` のグラフは直線になるということ．
+- パラメータについて線形ではない例：
+  - `\(Y = \beta_0 + \frac{\beta_1}{\beta_1 - \beta_2} X_1 +  \beta_2 X_2 + \varepsilon\)`
+- パラメータについて線形な例：
+  - `\(Y = \beta_0 + \beta_1 X_1 +  \beta_2 X_2 + \varepsilon\)`
+  - `\(Y = \beta_0 + \beta_1 X_1 +  \beta_2 X_1^2 + \varepsilon\)`
+  - `\(Y = \beta_0 + \beta_1 \log(X_1) +  \beta_2 \exp(X_2) + \varepsilon\)`
+  - `\(Y = \beta_0 + \beta_1 X_1 +  \beta_2 X_2 + \beta_3 X_1 X_2 + \varepsilon\)`
+
+---
+### 仮定2. **無作為抽出**
+
+- 得られたサンプル `\(\{Y_i, X_1, X_2, \dots, X_k\}_{i = 1}^n\)` が仮定1のモデルから得られたランダムサンプルであるという仮定．
+
+- 偏ったサンプルに基づいて回帰モデルを推定すると，真のモデルからはかけ離れた推定値になる．
+
+---
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-10-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-11-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+&lt;img src="Introduction_files/figure-html/unnamed-chunk-12-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+### 仮定3. **完全な共線性がない**
+
+- サンプルと母集団において次がなりたつという仮定：
+  1. 定数の変数がない，かつ，
+  2. 厳密に線形な関係が変数の間にない．
+  
+- 2はモデルの変数が他の変数の線形結合になっていないことを要請する．
+
+- 変数どうし（またはある変数と他の変数の線形結合）の相関係数が `\(1\)` や `\(-1\)`  になってはいけないということ．
+
+- 変数どうしが相関することを**許容しないわけではない**ことに注意．
+
+- 完全に相関するのがダメというだけで，相関するのは別に良い．
+
+- 完全に相関すると，OLS推定量は計算できなくなる．（変数をどれか諦めてドロップするしかない．）
+
+- 相関が高いとOLS推定量の分散が大きくなり，推定値が不安定になる（サンプルサイズが大きければ問題ない）．
+
+---
+### 仮定4. **条件付き期待値ゼロ**
+
+- 説明変数と誤差項に関係がないことを要求する仮定．つまり， `$$\mathbf{E}[\varepsilon \mid X_1, X_2, \dots, X_k] =  0.$$`
+
+- 説明変数と誤差項に関連がないということ．（相関がないと言うと厳密さを欠くが，その理解でもよい．）
+
+- この仮定が満たされる時，説明変数は**外生的**（exogenous）であると言われ，そのような変数を**外生変数**（exogenous variables）と呼ぶ．
+
+- 誤差項 `\(u\)` と `\(j\)` 番目の説明変数 `\(X_j\)` が相関するとき（i.e., `\(\text{Cov}(X_l, u)  \neq  0\)` ），  `\(X_j\)` を**内生的**（endogenous）であると言われ，そのような変数を内生変数（endogenous variable）と呼ぶ．
+
+---
+### OLS推定量の不偏性
+
+- 仮定1から仮定4が満たされるとき， `$$\mathbf{E}[\hat{\beta}_j] = \beta_j, \quad (j=0, 1, \dots, k)$$` である．
+
+- つまり，OLS推定量は**不偏性**を満たす．
+
+---
+**［証明］**　 `\(Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i\)` であり， `\(\bar{Y} = \beta_0 + \beta_1 \bar{X} + \bar{\varepsilon}\)` であることに注意して，
+
+`\begin{align*}
+\hat{\beta}_1^{OLS}  &amp;= \frac{\sum_{i=1}^n(X_i - \bar{X})(Y_i - \bar{Y})}{\sum_{i=1}^n(X_i -\bar{X})^2} \\ \\
+&amp;= \frac{\sum_{i=1}^n(X_i - \bar{X})[(X_i - \bar{X})\beta_1 + (\varepsilon -\bar{\varepsilon})]}{\sum_{i=1}^n(X_i -\bar{X})^2} \\ \\
+&amp;= \beta_1 + \frac{\sum_{i=1}^n(X_i - \bar{X})\varepsilon_i}{\sum_{i=1}^n(X_i -\bar{X})^2}.
+\end{align*}`
+
+したがって， `$$\mathbf{E}[\hat{\beta}_1^{OLS}] = \beta_1 + \mathbf{E}\Bigg[\frac{\sum_{i=1}^n(X_i - \bar{X})\varepsilon_i}{\sum_{i=1}^n(X_i -\bar{X})^2}\Bigg].$$`
+
+
+---
+仮定2と仮定4が成り立てば，繰り替えし期待値の法則により，
+$$
+`\begin{align*}
+\mathbf{E}\Bigg[\frac{\sum_{i=1}^n(X_i - \bar{X})\varepsilon_i}{\sum_{i=1}^n(X_i -\bar{X})^2}\Bigg] &amp;= \mathbf{E}\Bigg[\mathbf{E}\Bigg[\frac{\sum_{i=1}^n(X_i - \bar{X})\varepsilon_i}{\sum_{i=1}^n(X_i -\bar{X})^2} \Biggm\vert X_1, X_2, \dots, X_n \Bigg]\Bigg] \\ \\
+&amp;= \mathbf{E}\Bigg[\frac{\sum_{i=1}^n(X_i - \bar{X})\mathbf{E}[\varepsilon_i \mid X_i]}{\sum_{i=1}^n(X_i -\bar{X})^2}\Bigg] \\ \\
+&amp;= 0.
+\end{align*}`
+$$
+したがって， `$$\mathbf{E}[\hat{\beta}_1^{OLS}] = \beta_1$$` を得る．
+
+---
+### 欠落変数バイアス
+
+- 仮定4が満たされないことを，**内生性**（endogeneity）の問題と呼ぶ．
+
+- その典型例が**欠落変数バイアス**（omitted variable bias; **OVB**）というもの．
+
+- 真のモデルに含まれる変数の一部を空いて推定する際のモデルに含めないことによるバイアス．
+
+- たとえば， `\(Y = \beta_0 + \beta_1 X_1  + \beta_2  X_2 + \varepsilon\)` が真のモデル（仮定1-4を満たすとする）なのに，誤って `\(X_2\)` を含めずに推定して， `\(\tilde{Y} = \tilde{\beta}_0 + \tilde{\beta}_1X_1\)` という標本回帰関数を求めてしまうということ．
+
+- その場合， `\(\nu = \beta_2  X_2 + \varepsilon\)` として `\(Y = \beta_0 + \beta_1 X_1  + \nu\)` というモデルを推定していることになり，新たな誤差項 `\(\eta\)` には `\(\beta_2  X_2\)` が含まれる．
+
+- このとき， `\(\text{Bias}[\tilde{\beta}_1] = \mathbf{E}[\tilde{\beta}_1] - \beta_1 = \beta_2 \tilde{\delta_1}\)` であることが示せる．（**重要！**）
+
+- ただし， `\(\tilde{\delta_1}\)` は `\(X_1 = \delta_0 + \delta_1 X_2 + \eta\)` というモデルの傾きの推定量である．
+
+---
+
+- `\(\tilde{\delta_1}\)` というのは `\(X_1\)` と `\(X_2\)` の標本共分散 `\(\div\)` `\(X_2\)` の標本分散であるから，$X_1$ と `\(X_2\)` の標本相関係数がゼロであることが `\(\tilde{\delta_1} = 0\)` の必要十分条件．
+
+- つまり，$X_1$ と `\(X_2\)` が相関するとき `\(\mathbf{E}[\tilde{\beta}_1] \neq \beta_1\)` ということになる.
+  - `\(X_1\)` と `\(X_2\)` が相関するならば，当然， `\(X_1\)` と `\(\nu = \beta_2  X_2 + \varepsilon\)` も相関するため，仮定4が満たされない．
+
+- 逆に， `\(X_1\)` と `\(X_2\)` が無相関ならば `\(\mathbf{E}[\tilde{\beta}_1] = \beta_1\)` ということになり，欠落変数は無害となる（ `\(X_1\)` だけに関心があるならば， `\(X_2\)` の影響は単なるランダムなノイズとみなせる）．
+
+- バイアス（i.e., `\(\beta_2 \hat{\delta}\)` ）が正であるとき， `\(\mathbf{E}[\tilde{\beta}_1] &gt; \beta_1\)` となるため **上方バイアス**（upward bias）と呼び，負であるとき `\(\mathbf{E}[\tilde{\beta}_1] &lt; \beta_1\)` となるため**下方バイアス**（upward bias）と呼ぶ．
+
+- 欠落変数バイアスの方向は，  `\(\beta_2\)` と `\(\text{Corr}(X_1, X_2)\quad (\text{i.e., } \tilde{\delta_1})\)` の符号に依存する．
+
+---
+### 欠落変数バイアスの方向
+
+|                | `\(\text{Corr}(X_1, X_2) &gt; 0\)` | `\(\text{Corr}(X_1, X_2) &lt; 0\)` | 
+| -------------- | --------------------------- | --------------------------- | 
+| `\(\beta_2  &gt; 0\)` | 上方バイアス                | 下方バイアス                | 
+| `\(\beta_2 &lt; 0\)`  | 下方バイアス                | 上方バイアス                | 
+
+- `\(\mathbf{E}[\tilde{\beta_1}]\)` が `\(\beta_1\)` よりもゼロに近いとき，**ゼロに向かってバイアスがかかっている**（biased toward zero）と表現する．
+
+- `\(\beta_1 &gt; 0\)` のとき下方バイアスなら， `\(\beta_1 &lt; 0\)` のとき上方バイアスなら，ゼロに向かってバイアスがかかっているということになる．
+
+---
+### 仮定5. **均一分散**
+
+- 誤差項 `\(\varepsilon\)` の分散が `\(X_1, X_2, \dots, X_k\)` の値によらず一定であるという仮定．すなわち， `$$\text{Var}(\varepsilon \mid X_1, X_2, \dots, X_k) = \sigma^2.$$`
+
+- 導出は省略するが，仮定1から仮定5のもとで，サンプルの値に条件づけたとき，すべての `\(j = 1, 2, \dots, k\)` について `$$\text{Var}(\hat{\beta_j}) = \frac{\sigma^2}{\text{SST}_j (1 - R^2_j)}$$` となる．
+  
+  - ただし， `\(\text{SST}_j = \sum_{i = 1}^n (X_{ij} - \bar{X})^2\)` は `\(X_j\)` の標本総変動であり， `\(R^2_j\)` は `\(X_j\)` を他のすべての独立変数に回帰したときの決定係数である．
+
+&lt;!-- - 実は，仮定1から4は， `$$\mathbf{E}[Y \mid X_1, \dots, X_k] = \beta_0 + \beta_1 X_1 + \dots + \beta_k X_k$$` と書くことで表現できる． --&gt;
+
+&lt;!-- - 仮定5は， `\(\text{Var}[Y \mid X_1, \dots, X_k] = \sigma^2\)` と表現できる． --&gt;
+
+
+---
+`$$\text{Var}(\hat{\beta_j}) = \frac{\sigma^2}{\text{SST}_j (1 - R^2_j)}$$`
+
+- 推定量の分散は推定精度に相当し，小さければ小さいほど望ましい（推定値の信頼区間が狭まる）．
+  
+- **OLS推定量の分散の決定要素**：
+
+  - 誤差項の分散 `\(\sigma^2\)`. 小さくすると， `\(\text{Var}(\hat{\beta_j})\)` は小さくなる．モデルが従属変数をよく説明できるほど推定量の分散が小さくなるということ．統制変数を入れることで分散を小さくできる場合があることを示唆している．
+  
+  - `\(X_j\)` の標本総変動 `\(SST_j\)`. 大きくすると， `\(\text{Var}(\hat{\beta_j})\)` は小さくなる． `\(SST_j\)` はサンプルサイズ `\(n\)` について増加するので，サンプルサイズを増やすことで推定量の分散を小さくできることが示唆される．
+  
+  - `\(X_j\)` を他の説明変数に回帰したときの決定係数 `\(R^2_j\)`. 共線性に関係する．説明変数どうしの相関が高いほどOLS推定量の分散が大きくなる．
+
+---
+### 誤差項の分散の推定
+
+- 誤差項の分散 `\(\sigma^2 = \mathbf{E}[\varepsilon^2]\)` はデータからは直接観察できないので，推定する必要がある．
+
+- サンプルの各誤差 `\(\varepsilon_i\)` もデータからは直接観察できない．
+
+- **残差**（residual） `\(\hat{\varepsilon}_i = Y_i - \hat{\beta}_0 - \hat{\beta}_1X_{1i} - \hat{\beta}_2X_{2i} - \dots - \hat{\beta}_kX_{1k}\)` を使うのが自然．
+
+- 誤差項の分散の推定量として，次が使われる． `$$\hat{\sigma}^2 = \frac{\sum_{i=1}^n \hat{\varepsilon}_i}{n - k - 1}.$$`
+
+- 仮定1から5のもとで， `\(\mathbf{E}[\hat{\sigma}^2] = \sigma^2\)` であることが示せる．
+
+- `\(\hat{\sigma}^2\)` を推定量の分散に代入して平方根をとったものを**標準誤差**（standard deviation）と呼ぶ． `$$\text{se}(\hat{\beta}_j) = \hat{\sigma}/[\text{SST}_j  (1-R^2_j)]^{1/2}.$$`
+
+---
+### OLSの効率性：ガウス・マルコフの定理
+
+- 仮定1から5のもとで，OLS推定量は**最良線形不偏推定量**（best linear unbiased estimator; **BLUE**）である（ガウス・マルコフの定理）．
+
+- 線形推定量とは `\(\tilde{\beta}_j = \sum_{i=1}^n w_{ij}Y_i\)` として表すことができる推定量のことを指す．
+
+- OLS推定量も実は `\(\hat{\beta}_j^{OLS} = \Big( \sum_{i=1}^n r_{ij}Y_i\Big)/\Big(\sum_{i=1}^nr_{ij}^2\Big)\)` みたいな感じに書ける（cf. **partialling out**, **Frisch-Waugh定理**）．
+
+- つまり，任意の線形不偏推定量 `\(\tilde{\beta}_j\)` について `\(\text{Var}(\hat{\beta}_j^{OLS}) \leq \text{Var}(\tilde{\beta}_j)\)` が成り立つ．
+
+- OLSは単純な割に結構良い推定量ということ．
+
+---
+### 追加の仮定6. 正規性
+
+- 誤差項 `\(\varepsilon\)` が説明変数 `\(X_1, \dots, X_k\)` と独立であり，かつ， `\(\varepsilon \sim N(0, \sigma^2)\)` であるという仮定．
+
+- 仮定1から6を**古典的線形モデルの仮定**（classical linear model assumptions）と呼ぶ．
+
+- 古典的線形モデル仮定のもとでは，OLS推定量が**最良不偏推定量**（best unbiased estimator; **BUE**）となる．
+
+- また，このとき， `$$t_{\hat{\beta_j}} = \frac{\hat{\beta_j}}{\text{se}(\hat{\beta}_j)} \sim t_{n-k-1}$$` であることが示せる．
+
+- この** `\(t\)` 統計量**を使って， `\(t\)` 検定を行って推定値の有意性を検定する．
+
+---
+### 係数の推定値の有意性検定
+
+- `\(t_{\hat{\beta_j}} = \frac{\hat{\beta_j}}{\text{se}(\hat{\beta}_j)}\)` という検定統計量を使うときの帰無仮説は， `$$H_0: \,\beta_j = 0.$$`
+
+- 対立仮説は， `$$H_1:  \, \beta_j \neq 0.$$`
+
+- `\(t\)` 統計量から `\(p\)` 値を計算して，有意水準（10%, 5%, 1%）を下回れば，帰無仮説を棄却して**統計的に有意にゼロから離れている**と結論する．
+
+- 実際には仮定5（均一分散）が満たされることはあまりないため，標準誤差を修正した**不均一分散に頑健な標準誤差**（heterosekedasticity-robust standard error）を用いる必要がある．
+
+- さらに，実際には仮定6（正規性）も満たされると断言できることは少ない．
+
+
+---
+### おまけ
+
+- 最近，Bruce Hansenというすごくえらい経済学者がOLSはガウス・マルコフの仮定のもとで，**最良不偏推定量**（**BUE**）だと発表した [(Hansen, Forthcoming, ECTA)](https://jonnyphillips.github.io/FLS6415/Class_3/Angrist%20&amp;%20Pischke.pdf)．
+
+- しかし，色々と議論がある模様．たとえば，[こちらのWP](https://arxiv.org/abs/2203.01425)．
+
+- 正直よくわからないので，しばらくは従来の教科書の記述に従おう．
+
+---
+&lt;div align="center"&gt;
+&lt;img src="figs/01-fig1.png" width="800"&gt;
+&lt;/div&gt;
+---
+
+&lt;img src="figs/02-fig2.png" width="1000"&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
