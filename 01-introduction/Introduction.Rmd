@@ -322,31 +322,69 @@ $$
 ---
 $$Y = \beta_0 + \beta_1 X + \varepsilon.$$
 ```{r echo=FALSE, fig.align='center', out.width='50%'}
-set.seed(0); x <- rnorm(50, 2); y <- 4 + 3*x + rnorm(50, 0, 2);
-plot(x, y, pch = 16, xlim = c(-1, 4.5), ylim = c(-1, 20), col = "white", axes=FALSE)
-abline(v = 0);abline(h = 0); abline(4, 3, col = "red")
+set.seed(0)
+x <- rnorm(50, 2)
+y <- 4 + 3*x + rnorm(50, 0, 2)
+
+plot(x, y, 
+     pch = 16, 
+     xlim = c(-1, 4.5), 
+     ylim = c(-1, 20), 
+     col = "white",
+     axes=FALSE)
+
+abline(v = 0)
+abline(h = 0)
+abline(4, 3, col = "red")
 ```
 
 ---
 $$Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i.$$
 ```{r echo=FALSE, fig.align='center', out.width='50%'}
-plot(x, y, pch = 16, xlim = c(-1, 4.5), ylim = c(-1, 20), col = "white", axes=FALSE)
-abline(v = 0); abline(h = 0); abline(4, 3, col = "red")
-par(new = T); plot(x, y, pch = 16, xlim = c(-1, 4.5), ylim = c(-1, 20), axes=FALSE)
+plot(x, y, pch = 16, 
+     xlim = c(-1, 4.5),
+     ylim = c(-1, 20), 
+     col = "white", 
+     axes=FALSE)
+
+abline(v = 0)
+abline(h = 0)
+abline(4, 3, col = "red")
+
+par(new = T)
+plot(x, y,
+     pch = 16, 
+     xlim = c(-1, 4.5),
+     ylim = c(-1, 20), 
+     axes=FALSE)
 ```
 
 ---
 $$\{ Y_i, X_i \}_{i=1}^n.$$
 ```{r echo=FALSE, fig.align='center', out.width='50%'}
-plot(x, y, pch = 16, xlim = c(-1, 4.5), ylim = c(-1, 20), axes=FALSE)
+plot(x, y, 
+     pch = 16, 
+     xlim = c(-1, 4.5), 
+     ylim = c(-1, 20), 
+     axes=FALSE)
+
 abline(v = 0); abline(h = 0)
 ```
 
 ---
 $$Y_i = \hat{\beta}_0 + \hat{\beta}_1 X_i + \varepsilon_i.$$
 ```{r echo=FALSE, fig.align='center', out.width='50%'}
-plot(x, y, pch = 16, xlim = c(-1, 4.5), ylim = c(-1, 20), axes=FALSE)
-abline(v = 0); abline(h = 0); abline(lm(y ~ x), col = "red", lty = 2)
+plot(x, y, 
+     pch = 16, 
+     xlim = c(-1, 4.5), 
+     ylim = c(-1, 20), 
+     axes=FALSE)
+
+abline(v = 0)
+abline(h = 0)
+abline(lm(y ~ x), 
+       col = "red", 
+       lty = 2)
 ```
 
 ---
@@ -381,24 +419,51 @@ abline(v = 0); abline(h = 0); abline(lm(y ~ x), col = "red", lty = 2)
 - $b_0 = 4, b_1 = 1.$
 
 ```{r echo=FALSE, fig.align='center', out.width='50%'}
-plot(x, y, pch = 16, xlim = c(-1, 4.5), ylim = c(-1, 20), axes=FALSE)
-abline(v = 0); abline(h = 0); abline(4, 1, col = "red", lty = 2)
+plot(x, y, 
+     pch = 16, 
+     xlim = c(-1, 4.5), 
+     ylim = c(-1, 20), 
+     axes=FALSE)
+
+abline(v = 0)
+abline(h = 0)
+abline(4, 1, 
+       col = "red", 
+       lty = 2)
 ```
 
 ---
 - $\beta_0 = 0, \beta_1 = 5.$
 
 ```{r echo=FALSE, fig.align='center', out.width='50%'}
-plot(x, y, pch = 16, xlim = c(-1, 4.5), ylim = c(-1, 20), axes=FALSE)
-abline(v = 0); abline(h = 0); abline(0, 5, col = "red", lty = 2)
+plot(x, y, 
+     pch = 16, 
+     xlim = c(-1, 4.5), 
+     ylim = c(-1, 20), 
+     axes=FALSE)
+
+abline(v = 0)
+abline(h = 0)
+abline(0, 5, 
+       col = "red", 
+       lty = 2)
 ```
 
 ---
 - $b_0 = \hat{\beta}_0^{OLS}, b_1= \hat{\beta}_1^{OLS}.$
 
 ```{r echo=FALSE, fig.align='center', out.width='50%'}
-plot(x, y, pch = 16, xlim = c(-1, 4.5), ylim = c(-1, 20), axes=FALSE)
-abline(v = 0); abline(h = 0); abline(lm(y ~ x), col = "red", lty = 2)
+plot(x, y, 
+     pch = 16, 
+     xlim = c(-1, 4.5), 
+     ylim = c(-1, 20), 
+     axes=FALSE)
+
+abline(v = 0)
+abline(h = 0)
+abline(lm(y ~ x), 
+       col = "red",
+       lty = 2)
 ```
 
 ---
@@ -426,8 +491,15 @@ abline(v = 0); abline(h = 0); abline(-5, 4, col = "red")
 $\sum_{i=1}^n Y_i - b_0 - b_1 X_i \simeq 0$ となる直線の例（他にも無数にある）．
 
 ```{r echo=FALSE, fig.align='center', out.width='50%'}
-plot(x, y, pch = 16, xlim = c(-1, 4.5), ylim = c(-1, 20), axes=FALSE)
-abline(v = 0); abline(h = 0); abline(30.5, -10.072, col = "red")
+plot(x, y, 
+     pch = 16, 
+     xlim = c(-1, 4.5), 
+     ylim = c(-1, 20), 
+     axes=FALSE)
+abline(v = 0)
+abline(h = 0)
+abline(30.5, -10.072, 
+       col = "red")
 ```
 
 ---
@@ -447,27 +519,52 @@ abline(v = 0); abline(h = 0); abline(30.5, -10.072, col = "red")
 
 ---
 ```{r echo=FALSE}
-set.seed(0); X <- rnorm(100, 2); Y <- 5 + 3*X + rnorm(100, 0, 1)
+set.seed(0)
+X <- rnorm(100, 2)
+Y <- 5 + 3*X + rnorm(100, 0, 1)
 ```
 
 $R^2=$ `r round(summary(lm(Y ~ X))$r.squared, 2)` 
 
 ```{r echo=FALSE, fig.align='center', out.width='50%'}
-set.seed(0); X <- rnorm(100, 2); Y <- 5 + 3*X + rnorm(100, 0, 1)
-plot(X, Y, pch = 16, xlim = c(-0.5, 4), ylim = c(-1, 20), axes=FALSE)
-abline(v = 0); abline(h = 0); abline(lm(Y ~ X), col = "red", lty = 2)
+set.seed(0)
+X <- rnorm(100, 2)
+Y <- 5 + 3*X + rnorm(100, 0, 1)
+
+plot(X, Y, 
+     pch = 16, 
+     xlim = c(-0.5, 4), 
+     ylim = c(-1, 20), 
+     axes=FALSE)
+
+abline(v = 0)
+abline(h = 0)
+abline(lm(Y ~ X),
+       col = "red", 
+       lty = 2)
 ```
 
 ---
 ```{r echo=FALSE}
-set.seed(0); X <- rnorm(100, 2); Y <- 5 + 3*X + rnorm(100, 0, 3)
+set.seed(0)
+X <- rnorm(100, 2)
+Y <- 5 + 3*X + rnorm(100, 0, 3)
 ```
 
 $R^2=$ `r round(summary(lm(Y ~ X))$r.squared, 2)`
 
 ```{r echo=FALSE, fig.align='center', out.width='50%'}
-plot(X, Y, pch = 16, xlim = c(-0.5, 4), ylim = c(-1, 20), axes=FALSE)
-abline(v = 0); abline(h = 0); abline(lm(Y ~ X), col = "red", lty = 2)
+plot(X, Y, 
+     pch = 16, 
+     xlim = c(-0.5, 4),
+     ylim = c(-1, 20), 
+     axes=FALSE)
+
+abline(v = 0)
+abline(h = 0)
+abline(lm(Y ~ X), 
+       col = "red", 
+       lty = 2)
 ```
 
 ---
@@ -523,19 +620,56 @@ OLS推定量はいくつかの条件が満たされるとき，推定する上�
 
 ---
 ```{r echo=FALSE, fig.align='center', out.width='50%'}
-plot(x, y, pch = 16, xlim = c(-1, 4.5), ylim = c(-1, 20), axes=FALSE, col = "grey")
-abline(v = 0); abline(h = 0); abline(4, 3, col = "red")
+plot(x, y, 
+     pch = 16, 
+     xlim = c(-1, 4.5), 
+     ylim = c(-1, 20), 
+     axes=FALSE,
+     col = "grey")
+
+abline(v = 0)
+abline(h = 0)
+abline(4, 3, 
+       col = "red")
+
 par(new =  T)
-plot(x[abs(x  - 2) < 0.35], y[abs(x  - 2) < 0.35], pch = 16, xlim = c(-1, 4.5), ylim = c(-1, 20), axes=FALSE, xlab = "", ylab = "")
+plot(x[abs(x  - 2) < 0.35], 
+     y[abs(x  - 2) < 0.35],
+     pch = 16, 
+     xlim = c(-1, 4.5), 
+     ylim = c(-1, 20), 
+     axes=FALSE, 
+     xlab = "", 
+     ylab = "")
 ```
 
 ---
 ```{r echo=FALSE, fig.align='center', out.width='50%'}
-plot(x, y, pch = 16, xlim = c(-1, 4.5), ylim = c(-1, 20), axes=FALSE, col = "grey")
-abline(v = 0); abline(h = 0); abline(4, 3, col = "red")
+plot(x, y, 
+     pch = 16, 
+     xlim = c(-1, 4.5),
+     ylim = c(-1, 20), 
+     axes=FALSE, 
+     col = "grey")
+
+abline(v = 0)
+abline(h = 0)
+abline(4, 3,
+       col = "red")
+
 par(new =  T)
-plot(x[abs(x  - 2) < 0.35], y[abs(x  - 2) < 0.35], pch = 16, xlim = c(-1, 4.5), ylim = c(-1, 20), axes=FALSE, xlab = "", ylab = "")
-abline(lm(y[abs(x  - 2) < 0.35] ~ x[abs(x  - 2) < 0.35]),  col = "red",  lty = 2)
+plot(x[abs(x  - 2) < 0.35], 
+     y[abs(x  - 2) < 0.35], 
+     pch = 16, 
+     xlim = c(-1, 4.5), 
+     ylim = c(-1, 20), 
+     axes=FALSE, 
+     xlab = "", 
+     ylab = "")
+
+abline(lm(y[abs(x  - 2) < 0.35] ~ x[abs(x  - 2) < 0.35]),  
+       col = "red",  
+       lty = 2)
 ```
 
 ---
@@ -609,7 +743,7 @@ $$
 
 - たとえば， $Y = \beta_0 + \beta_1 X_1  + \beta_2  X_2 + \varepsilon$ が真のモデル（仮定1-4を満たすとする）なのに，誤って $X_2$ を含めずに推定して， $\tilde{Y} = \tilde{\beta}_0 + \tilde{\beta}_1X_1$ という標本回帰関数を求めてしまうということ．
 
-- その場合， $\nu = \beta_2  X_2 + \varepsilon$ として $Y = \beta_0 + \beta_1 X_1  + \nu$ というモデルを推定していることになり，新たな誤差項 $\eta$ には $\beta_2  X_2$ が含まれる．
+- その場合， $\nu = \beta_2  X_2 + \varepsilon$ として $Y = \beta_0 + \beta_1 X_1  + \nu$ というモデルを推定していることになり，新たな誤差項 $\nu$ には $\beta_2  X_2$ が含まれる．
 
 - このとき， $\text{Bias}[\tilde{\beta}_1] = \mathbf{E}[\tilde{\beta}_1] - \beta_1 = \beta_2 \tilde{\delta_1}$ であることが示せる．（**重要！**）
 
@@ -649,7 +783,7 @@ $$
 
 - 逆に，不要な変数を誤って入れてしまう場合はどうか？
 
-  - 例：真のモデルが $Y = \beta_0 + \beta_1 X_1 + \varepsilon$ なのに $Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \varepsilon$ と誤って特定化．
+  - 例：真のモデルが $Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \varepsilon$ かつ $\beta_2 = 0$ である（仮定1から4を満たすとする）ときに $Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \varepsilon$ と特定化．
   
   - これを**過剰特定化**（overspecification）と呼ぶ．
 
@@ -802,8 +936,16 @@ $$Y = \beta_0 + \beta_1 X_1 +  \beta_2 X_1^2 +  \beta_3 X_1^3 + \cdots + \beta_p
 ---
 
 ```{r echo=FALSE, fig.align='center', out.width='50%'}
-set.seed(0); x <- rnorm(100, 3); y <- -5 +10*x - 1.1*x^2 + rnorm(100)
-plot(x, y, pch = 16, xlim = c(-1, 6), ylim = c(-1, 20), axes=FALSE)
+set.seed(0)
+x <- rnorm(100, 3)
+y <- -5 +10*x - 1.1*x^2 + rnorm(100)
+
+plot(x, y,
+     pch = 16, 
+     xlim = c(-1, 6), 
+     ylim = c(-1, 20), 
+     axes=FALSE)
+
 abline(v = 0)
 abline(h = 0)
 ```
@@ -812,14 +954,26 @@ abline(h = 0)
 1次： $\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X_1.$
 
 ```{r echo=FALSE, fig.align='center', out.width='50%'}
-set.seed(0); x <- rnorm(100, 3); y <- -5 +10*x - 1.1*x^2 + rnorm(100)
-plot(x, y, pch = 16, xlim = c(-1, 6), ylim = c(-1, 20), axes=FALSE)
+set.seed(0)
+x <- rnorm(100, 3)
+y <- -5 +10*x - 1.1*x^2 + rnorm(100)
+
+plot(x, y, 
+     pch = 16,
+     xlim = c(-1, 6), 
+     ylim = c(-1, 20), 
+     axes=FALSE)
+
 fit <- lm(y ~ x)
 pred <- predict(fit)
 ix <- sort(x, index.return=T)$ix
+
 abline(v = 0)
 abline(h = 0)
-lines(x[ix], pred[ix], col='red', lwd =2, lty=2)
+lines(x[ix], pred[ix], 
+      col='red', 
+      lwd =2, 
+      lty=2)
 ```
 
   
@@ -828,14 +982,25 @@ lines(x[ix], pred[ix], col='red', lwd =2, lty=2)
 2次： $\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X_1 + \hat{\beta}_1 X_1^2.$
 
 ```{r echo=FALSE, fig.align='center', out.width='50%'}
-set.seed(0); x <- rnorm(100, 3); y <- -5 +10*x - 1.1*x^2 + rnorm(100)
-plot(x, y, pch = 16, xlim = c(-1, 6), ylim = c(-1, 20), axes=FALSE)
+set.seed(0)
+x <- rnorm(100, 3)
+y <- -5 +10*x - 1.1*x^2 + rnorm(100)
+plot(x, y, 
+     pch = 16,
+     xlim = c(-1, 6),
+     ylim = c(-1, 20),
+     axes=FALSE)
+
 fit <- lm(y ~ x + I(x^2))
 pred <- predict(fit)
 ix <- sort(x, index.return=T)$ix
+
 abline(v = 0)
 abline(h = 0)
-lines(x[ix], pred[ix], col='red', lwd =2, lty=2)
+lines(x[ix], pred[ix], 
+      col='red',
+      lwd =2, 
+      lty=2)
 ```
 
 ---
@@ -857,15 +1022,41 @@ $$Y_i = \beta_0 + \beta_1 D_i+ \varepsilon_i.$$
 $Y_i = \beta_0 + \beta_1 X_i+ \varepsilon_i.$
 
 ```{r echo=FALSE, fig.align='center', out.width='50%'}
-set.seed(0); x <- rnorm(100, 3); D <- 1 * (x + rnorm(100)>3); y <- -5 +10*x - 20*D + rnorm(100)
-plot(x, y, pch = 16, xlim = c(-1, 6), ylim = c(-1, 40), axes=FALSE, col = "white")
+set.seed(0)
+x <- rnorm(100, 3)
+D <- 1 * (x + rnorm(100)>3)
+y <- -5 +10*x - 20*D + rnorm(100)
+
+plot(x, y, 
+     pch = 16, 
+     xlim = c(-1, 6), 
+     ylim = c(-1, 40),
+     axes=FALSE, 
+     col = "white")
+
 par(new = T)
-plot(x[D==1], y[D==1], pch = 16, xlim = c(-1, 6), ylim = c(-1, 40), xlab="", ylab = "", axes=FALSE, col = "lightblue")
+plot(x[D==1], y[D==1], 
+     pch = 16, 
+     xlim = c(-1, 6), 
+     ylim = c(-1, 40), 
+     xlab="", ylab = "", 
+     axes=FALSE, 
+     col = "lightblue")
+
 par(new = T)
-plot(x[D==0], y[D==0], pch = 16, xlim = c(-1, 6), ylim = c(-1, 40), xlab="", ylab = "", axes=FALSE, col = "pink")
+plot(x[D==0], y[D==0], 
+     pch = 16, 
+     xlim = c(-1, 6), 
+     ylim = c(-1, 40), 
+     xlab="", 
+     ylab = "", 
+     axes=FALSE, 
+     col = "pink")
+
 fit <- lm(y ~ x)
 pred <- predict(fit)
 ix <- sort(x, index.return=T)$ix
+
 abline(v = 0)
 abline(h = 0)
 lines(x[ix], pred[ix], col='red', lwd =2, lty=2)
@@ -876,14 +1067,52 @@ lines(x[ix], pred[ix], col='red', lwd =2, lty=2)
 $Y_i = \beta_0 + \beta_1 D_i + \varepsilon_i.$
 
 ```{r echo=FALSE, fig.align='center', out.width='50%'}
-set.seed(0); x <- rnorm(100, 3); D <- 1 * (x + rnorm(100)>3); y <- -5 +10*x - 20*D + rnorm(100)
-plot(x, y, pch = 16, xlim = c(-1, 6), ylim = c(-1, 40), axes=FALSE, col = "white")
+set.seed(0)
+x <- rnorm(100, 3)
+D <- 1 * (x + rnorm(100)>3)
+y <- -5 +10*x - 20*D + rnorm(100)
+
+plot(x, y, 
+     pch = 16, 
+     xlim = c(-1, 6), 
+     ylim = c(-1, 40), 
+     axes=FALSE, 
+     col = "white")
+
 par(new = T)
-plot(x[D==1], y[D==1], pch = 16, xlim = c(-1, 6), ylim = c(-1, 40), xlab="", ylab = "", axes=FALSE, col = "lightblue")
+plot(x[D==1], y[D==1], 
+     pch = 16, 
+     xlim = c(-1, 6), 
+     ylim = c(-1, 40), 
+     xlab="", 
+     ylab = "", 
+     axes=FALSE, 
+     col = "lightblue")
+
 par(new = T)
-plot(x[D==0], y[D==0], pch = 16, xlim = c(-1, 6), ylim = c(-1, 40), xlab="", ylab = "", axes=FALSE, col = "pink")
-segments(x0 = 3, x1 = 4.5, y0 = sum(lm(y ~ D)$coefficients), y1 = sum(lm(y ~ D)$coefficients), col = "red", lty = 2)
-segments(x0 = 1.5, x1 = 3, y0 = lm(y ~ D)$coefficients[1], y1 = lm(y ~ D)$coefficients[1], col = "red", lty = 2)
+plot(x[D==0], y[D==0], 
+     pch = 16, 
+     xlim = c(-1, 6), 
+     ylim = c(-1, 40), 
+     xlab="", 
+     ylab = "", 
+     axes=FALSE, 
+     col = "pink")
+
+segments(x0 = 3, 
+         x1 = 4.5, 
+         y0 = sum(lm(y ~ D)$coefficients), 
+         y1 = sum(lm(y ~ D)$coefficients),
+         col = "red",
+         lty = 2)
+
+segments(x0 = 1.5,
+         x1 = 3, 
+         y0 = lm(y ~ D)$coefficients[1], 
+         y1 = lm(y ~ D)$coefficients[1], 
+         col = "red", 
+         lty = 2)
+
 abline(v = 0)
 abline(h = 0)
 ```
@@ -893,19 +1122,58 @@ abline(h = 0)
 $Y_i = \beta_0 + \beta_1 X_i + \beta_2 D_i + \varepsilon_i.$
 
 ```{r echo=FALSE, fig.align='center', out.width='50%'}
-set.seed(0); x <- rnorm(100, 3); D <- 1 * (x + rnorm(100)>3); y <- -5 +10*x - 20*D + rnorm(100)
-plot(x, y, pch = 16, xlim = c(-1, 6), ylim = c(-1, 40), axes=FALSE, col = "white")
+set.seed(0)
+x <- rnorm(100, 3)
+D <- 1 * (x + rnorm(100)>3)
+y <- -5 +10*x - 20*D + rnorm(100)
+
+plot(x, y, 
+     pch = 16, 
+     xlim = c(-1, 6), 
+     ylim = c(-1, 40),
+     axes=FALSE,
+     col = "white")
+
 par(new = T)
-plot(x[D==1], y[D==1], pch = 16, xlim = c(-1, 6), ylim = c(-1, 40), xlab="", ylab = "", axes=FALSE, col = "lightblue")
+plot(x[D==1], y[D==1],
+     pch = 16, 
+     xlim = c(-1, 6),
+     ylim = c(-1, 40), 
+     xlab="",
+     ylab = "", 
+     axes=FALSE, 
+     col = "lightblue")
+
 par(new = T)
-plot(x[D==0], y[D==0], pch = 16, xlim = c(-1, 6), ylim = c(-1, 40), xlab="", ylab = "", axes=FALSE, col = "pink")
-segments(x0 = 0.7, x1 = 5.5, y0 = 1.8866, y1 = 50.261, col = "red", lty = 2)
-segments(x0 = 0.7, x1 = 5.5, y0 = 1.8866-20.001, y1 = 50.261-20.001, col = "red", lty = 2)
+plot(x[D==0], y[D==0], 
+     pch = 16, 
+     xlim = c(-1, 6),
+     ylim = c(-1, 40), 
+     xlab="",
+     ylab = "", 
+     axes=FALSE,
+     col = "pink")
+
+segments(x0 = 0.7, 
+         x1 = 5.5, 
+         y0 = 1.8866,
+         y1 = 50.261, 
+         col = "red",
+         lty = 2)
+
+segments(x0 = 0.7, 
+         x1 = 5.5, 
+         y0 = 1.8866-20.001, 
+         y1 = 50.261-20.001, 
+         col = "red", 
+         lty = 2)
+
 abline(v = 0)
 abline(h = 0)
 ```
 
 ---
+
 ### 交差項
 
 $$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_1X_2 + \varepsilon.$$
@@ -923,7 +1191,10 @@ $$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_1X_2 + \varepsilon.$$
 - $X_2$ の限界効果は， $\beta_2 + \beta_3 X_1$ となり， $X_1$ に依存している．
 
 
---- 
+
+---
+
+
 ### 対数
 
 - 従属変数や説明変数を対数変換して使うことがある．
@@ -936,6 +1207,7 @@ $$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_1X_2 + \varepsilon.$$
 
 - 従属変数が対数の場合は，係数の解釈は「 $educ$ が $1$ 単位増えると， $wage$ が $(100\times\beta_1)\%$ 増える」となる．
 
-- 独立変数が対数の場合は，係数の解釈は「 $educ$ が $1%$ 増えると， $wage$ が $(\beta_1/100)\%$ 増える」となる．
+- 独立変数が対数の場合は，係数の解釈は「 $educ$ が $1\%$ 増えると， $wage$ が $(\beta_1/100)\%$ 増える」となる．
 
 - 両方が対数の場合は，係数の解釈は「 $educ$ が $1%$ 増えると， $wage$ が $\beta\%$ 増える」となる．
+
