@@ -11,7 +11,7 @@ Webページは[こちら](https://ritsu1997.github.io/owanseminar/)．
 **初回までに提出の事前課題があります**．
 事前課題は[こちら](99-asignments/00-problemset_0.pdf)．
 
-事前課題の模範解答（解説付き！）は[こちら](99-asignments/00-problemset_0_solutions.pdf)．　（渡邊さんありがとうございます．）
+事前課題の模範解答（解説付き！）は[こちら](99-asignments/00-problemset_0_solutions.pdf)．　（3期生の渡邊さんありがとうございます．）
 
 
 | No. | トピック                                     | 予習                                                                                                                               | スライド（元ファイル） | スライド（PDF） | 問題集 | 
