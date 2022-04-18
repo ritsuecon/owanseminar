@@ -156,7 +156,7 @@ Scott Cunninghamという経済学者が書いた[***Causal Inference: The Mixta
     - [高橋・中室・大湾（2021）「禁煙プログラムの生産性への短期的影響」RIETI DP ](https://www.rieti.go.jp/jp/publications/summary/21070013.html)
     
  - 【補足】
-    - DAGについて詳しく知りたい人は， J. Pearlらの[『統計的因果推論』（落海浩　訳）](https://www.amazon.co.jp/-/en/Judea-Pearl/dp/4254122411/ref=sr_1_2?adgrpid=76726571005&gclid=CjwKCAjw9e6SBhB2EiwA5myr9nMyPGUlPlYxKxyueXsLDfWDHoCy56fRbSr-GZNLfGbvkOXLrnoQNBoCBrIQAvD_BwE&hvadid=553910717164&hvdev=c&hvlocphy=1009279&hvnetw=g&hvqmt=e&hvrand=10303890155949434770&hvtargid=kwd-824176193956&hydadcr=27485_14478977&jp-ad-ap=0&keywords=%E7%B5%B1%E8%A8%88%E7%9A%84%E5%9B%A0%E6%9E%9C%E6%8E%A8%E8%AB%96&qid=1650254437&sr=8-2)やMorgan and Winshipの*Counterfactuals and Causal Inference: Methods and Principles for Social Research*](https://www.amazon.co.jp/-/en/Stephen-L-Morgan-ebook/dp/B00SJL7TGK/ref=sr_1_2?crid=H1IDAU984D1B&keywords=causal+inference+sociology&qid=1650254479&sprefix=causal+inferendce+sociolog%2Caps%2C213&sr=8-2)などを参照されたい．
+    - DAGについて詳しく知りたい人は， J. Pearlらの[『統計的因果推論』（落海浩　訳）](https://www.amazon.co.jp/dp/4254122411/ref=cm_sw_em_r_mt_dp_Z7X0RZ6P6KC700KSP38C)やMorgan and Winshipの[*Counterfactuals and Causal Inference: Methods and Principles for Social Research*](https://www.amazon.co.jp/-/en/Stephen-L-Morgan-ebook/dp/B00SJL7TGK/ref=sr_1_2?crid=H1IDAU984D1B&keywords=causal+inference+sociology&qid=1650254479&sprefix=causal+inferendce+sociolog%2Caps%2C213&sr=8-2)などを参照されたい．
     - Bad controlsについては， [Cinelli, Forney, and Pearl (2022)](https://ftp.cs.ucla.edu/pub/stat_ser/r493.pdf)を参照するとよい．
 
 #### 3. Potential Outcomes Causal Model (Ch. 4)
