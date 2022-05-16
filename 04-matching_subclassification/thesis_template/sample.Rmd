@@ -1,1 +1,157 @@
+---
+title: "成果報酬は従業員の生産性を高めるか？"
+subtitle: "人事データを用いた定量的な評価"
+author:
+  - 人事 花子^[早稲田大学政治経済学部経済学科，hanako@fuji.waseda.jp]
+  - 組織 太郎^[早稲田大学政治経済学部国際政治経済学科，taro@fuji.waseda.jp]
+date: "最終更新：`r substr(Sys.time(), 1, 4)`年`r as.integer(substr(Sys.time(), 6, 7))`月`r as.integer(substr(Sys.time(), 9, 10))`日`r substr(Sys.time(), 12, 16)`"
+output: 
+  word_document:
+    reference_docx: word-styles-reference-01.docx
+    number_sections: true
+bibliography: bibliography.bib 
+abstract: |
+  **要旨：**本稿では，実際の企業の人事データを利用して，成果報酬制度が従業員の生産性に与える効果を検証する．本稿では，実際の企業の人事データを利用して，成果報酬制度が従業員の生産性に与える効果を検証する．本稿では，実際の企業の人事データを利用して，成果報酬制度が従業員の生産性に与える効果を検証する．本稿では，実際の企業の人事データを利用して，成果報酬制度が従業員の生産性に与える効果を検証する．本稿では，実際の企業の人事データを利用して，成果報酬制度が従業員の生産性に与える効果を検証する．
+---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(modelsummary)
+library(fixest)
+```
+
+# はじめに
+
+**太字**は`**太字**`とすればよい．*斜体字*は`**斜体字**`である．
+ハイパーリンクは次の通り，`[ウェブサイト](URL)`のようにすればよい．
+[TAセッションのwebページ](https://github.com/ritsu1997/owanseminar)．
+セクションは`#`を使う．
+`#`の数が多いほど，セクションのレベルが下がる．
+
+## `#`が２つ（サブセクション）
+
+シャープが２つ．
+
+### `#`が３つ（サブサブセクション）
+
+シャープが３つ．
+
+#### `#`が４つ（サブサブサブセクション）
+
+`#`が４つ．
+
+# 先行研究
+
+成果報酬と生産性のカノニカルな論文と言えば，[@lazear2000performance]である．引用する際には，`bibliography.bib`というファイルにbibtex形式で情報を入れた上で，本文の中では`[@lazear2000performance]`のようにすればよい．
+
+# 理論モデル
+
+数式も使える．ほぼLaTeXと同じように使える．従業員の効用関数を，
+
+$$ U = f(Y , X), $$
+
+とする．これは`$$ U = f(Y , X), $$`と入力すればよい．インテキストの数式も，`$\frac{\partial U}{\partial Y}$`のように書けば，$\frac{\partial U}{\partial Y}$となる．
+
+# データ
+
+架空のデータを用いる．チャンクのオプションで`include=FALSE`と指定すれば，そのチャンクコードは出力されるファイルには表示されない．
+
+```{r include=FALSE}
+mydata <- readr::read_csv("simulated_data.csv")
+```
+
+この直前にはチャンクが隠されており，データを読み込むコードが実行されている．Rmdファイル上では次のようなテキストが入力されている．
+
+````
+```{r include=FALSE}`r ''`
+mydata <- readr::read_csv("simulated_data.csv")
+```
+````
+
+## 記述統計
+
+記述統計量は**modelsummary**パッケージの`datasummary`関数を用いるとよい．
+
+```{r echo=FALSE}
+datasummary(data = mydata, 
+            (`平均売り上げ（万円）` = avgsales) 
+            + (`成果報酬ダミー` = piecerate) 
+            + (`奨励ダミー` = encouragement) 
+            ~ N + Mean + SD + Min + Max,
+            title  = "記述統計量")
+```
+
+# 実証戦略
+
+次の回帰モデルを推定する．
+
+$$
+AvgSales = \beta_0 + \beta_1 PieceRate + \varepsilon.
+$$
+このとき，$\mathbf{E}[\varepsilon \mid PieceRate] \neq  0$であると，OLS推定量はバイアスを持つことになる．
+したがって，成果報酬制度を導入することのランダムな奨励を受けたかどうかを表す$Encouragement$というダミー変数を操作変数として用いて，$\beta_1$を推定する．
+つまり，第一段階の回帰式は，
+$$
+PieceRate = \gamma_0 + \gamma_1 Encouragement + \eta,
+$$
+である．
+奨励はランダムであったため，$\mathbf{Cov}(\varepsilon, Encouragement) = 0$であると仮定できるため，2SLS推定量は一致性を満たす．
+
+# 推定結果
+
+回帰分析には**fixest**パッケージの`feols`関数を用いるのがおすすめ．
+回帰分析の推定結果は，**modelsummary**パッケージの`modelsummary`関数を使うとよい．
+
+```{r echo=FALSE}
+model1 <- feols(avgsales ~ piecerate, mydata)
+model2 <- feols(avgsales ~ piecerate | region, mydata)
+model3 <- feols(avgsales ~ 1 | piecerate ~ encouragement, mydata)
+model4 <- feols(avgsales ~ 1 | region | piecerate ~ encouragement, mydata)
+
+
+models <- list(
+  "OLS [1]" = model1,
+  "OLS [2]" = model2,
+  "2SLS [1]" = model3,
+  "2SLS [2]" = model4
+)
+
+row <- tibble::tribble(~term, ~"OLS [1]", ~"OLS [2]2", ~"2SLS [1]", ~"2SLS [2]", "地域固定効果", "No", "Yes", "No", "Yes")
+attr(row, 'position') <- 5
+
+modelsummary(models,
+             title ="推定結果",
+             stars  = TRUE,
+             coef_rename = c("(Intercept)" = "切片",
+                             "piecerate" = "成果報酬",
+                             "fit_piecerate" = "成果報酬"),
+             gof_map = c("nobs", "r.squared"),
+             add_rows = row,
+             fmt = "%.2f")
+```
+
+
+# 結論
+
+このようにレポートや卒論を再現性の高いフォーマットで作りましょう．
+
+R Markdownなどについて，参考になる資料：
+
+- https://rmarkdown.rstudio.com/
+- https://gedevan-aleksizde.github.io/rmarkdown-cookbook/
+- https://bookdown.org/yihui/rmarkdown/
+- https://bookdown.org/yihui/bookdown/
+
+**modelsummary**について，参考になる資料：
+
+- https://vincentarelbundock.github.io/modelsummary/articles/modelsummary.html
+- https://keita43a.hatenablog.com/entry/2020/05/29/210250
+- https://tomoecon.github.io/R_for_graduate_thesis/Regression.html
+
+**fixest**について，参考になる資料：
+
+- https://cran.r-project.org/web/packages/fixest/vignettes/fixest_walkthrough.html
+- https://keita43a.hatenablog.com/entry/2020/12/01/202122
+
+# 参考文献
