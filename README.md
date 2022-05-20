@@ -24,3 +24,17 @@ Webページは[こちら](https://ritsu1997.github.io/owanseminar/)．
 | 7   | Difference-in-Differences (Ch. 9)            | [[Ch.9]](https://mixtape.scunning.com/panel-data.html)                                                                             | 準備中                                                                                   | 準備中                                                                                            | 準備中                                                                   | -                                                                               | 
 | 8   | 離散選択モデル入門                           | 準備中                                                                                                                             | 準備中                                                                                   | 準備中                                                                                            | 準備中                                                                   | -                                                                               | 
 | 9   | アンケートデータの使い方：変数の次元縮約など | 準備中                                                                                                                             | 準備中                                                                                   | 準備中                                                                                            | 準備中                                                                   | -                                                                               | 
+
+
+Githubがmarkdown上で数式をレンダリングできるようになったらしい．
+$$
+\max U(x_1, x_2) \quad \text{s.t. } Y = p_1 x_1 + p_2 x_2.
+$$
+
+ほんとだ！
+
+$$
+\log(wage) \beta_0 + \beta_1 educ + \varepsilon.
+$$
+
+すごい！
