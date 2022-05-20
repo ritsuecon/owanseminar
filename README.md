@@ -27,6 +27,7 @@ Webページは[こちら](https://ritsu1997.github.io/owanseminar/)．
 
 
 Githubがmarkdown上で数式をレンダリングできるようになったらしい．
+
 $$
 \max U(x_1, x_2) \quad \text{s.t. } Y = p_1 x_1 + p_2 x_2.
 $$
