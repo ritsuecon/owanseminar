@@ -35,7 +35,7 @@ $$
 ほんとだ！
 
 $$
-\log(wage) \beta_0 + \beta_1 educ + \varepsilon.
+\log(wage)\beta_0 + \beta_1 educ + \varepsilon.
 $$
 
 すごい！
