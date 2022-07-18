@@ -220,7 +220,7 @@ mydata %>%
                output = "markdown")
 ```
 
-## ロジット・モデルの解釈
+## ロジット・モデルの解釈1
 
 -   係数はそのまま効果として解釈することはできない．
 
@@ -229,13 +229,19 @@ mydata %>%
 -   経済学では，効果の評価のために**平均限界効果**（AME; average marginal effect）を計算することが多い．
 
 $$
-\text{AME}_{X_1}  = \sum_{i = 1}^n \frac{\partial \Pr(Y_i=1\mid X_i)}{\partial X_{1i}}
+\text{AME}_{X_1}  = \frac{1}{n}\sum_{i = 1}^n \frac{\partial \Pr(Y_i=1\mid X_i)}{\partial X_{1i}}
 $$
 -   ただし，説明変数がダミー変数の場合は，微分できないので，差をとる．
 
 $$
-\text{AME}_{X_1}  = \sum_{i = 1}^n \Pr(Y_i=1 \mid X_i, X_{1i} = 1) - \Pr(Y_i=1 \mid X_i, X_{1i} = 0)
+\text{AME}_{X_1}  = \frac{1}{n}\sum_{i = 1}^n \big[\Pr(Y_i=1 \mid X_i, X_{1i} = 1) - \Pr(Y_i=1 \mid X_i, X_{1i} = 0)\big]
 $$
+
+## ロジット・モデルの解釈2
+
+-   $\frac{\partial \mathrm{\Lambda}(\beta_0 + \beta_1X_1 + \cdots + \beta_kX_k)}{\partial X_{j}} =  \frac{\exp(\beta_0 + \beta_1X_1 + \cdots + \beta_kX_k)}{(1 + \exp(\beta_0 + \beta_1X_1 + \cdots + \beta_kX_k))^2} \beta_j$なので，係数の推定値と限界効果の符号は一致する．
+
+-   係数の推定値だけでは効果の大きさがわからないが，効果の方向はわかる．
 
 ## 平均限界効果の求め方
 
@@ -282,7 +288,7 @@ mydata %>%
 
 ## LPM, ロジット，プロビットの比較
 
--   LPMの係数，ロジット，プロビットのAMEはだいたい同じ値になることが多い．
+-   LPMの係数，ロジット，プロビットのAMEはだいたい同じような値になることが多い．
 
 ```{r}
 #| echo: false
